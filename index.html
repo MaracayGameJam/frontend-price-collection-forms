@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Colector de precios</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <form id="price-form" novalidate>
+        <div class="fields">
+          
+          <div class="field">
+            <label for="product">Producto</label>
+            <input 
+              id="product" 
+              name="product" 
+              type="text" 
+              autocomplete="off" 
+            />
+          </div>
+          
+          <div class="field">
+            <label for="category">Categoría</label>
+            <input
+              id="category"
+              name="category"
+              type="text"
+              autocomplete="off"
+            />
+          </div>
+
+          
+
+          <div class="field">
+            <label for="presentation">Presentación</label>
+            <input
+              id="presentation"
+              name="presentation"
+              type="text"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="field-row field-row--price-currency">
+
+            <div class="field">
+              <label for="price">Precio</label>
+              <input 
+                id="price" 
+                name="price" 
+                type="text" 
+                autocomplete="off" 
+              />
+            </div>
+            
+            <div class="field">
+              <label for="currency">Moneda</label>
+              <select 
+                id="currency" 
+                name="currency" 
+              >
+              </select>
+            </div>
+
+          </div>
+
+          <div class="field">
+
+            <label for="store">Tienda</label>
+            <input 
+              id="store" 
+              name="store" 
+              type="text" 
+              autocomplete="off" 
+            />
+
+          </div>
+        
+        </div>
+        
+        <button id="submit-price-form" type="submit">Enviar</button>
+
+      </form>
+    </main>
+
+    <div id="loading-wrapper" aria-hidden="true">
+      <div class="loading-spinner" aria-hidden="true"></div>
+    </div>
+
+    <script type="text/javascript" src="js/_commons/EventBus.js"></script>
+    <script type="text/javascript" src="js/_commons/ApiManager.js"></script>
+    <script type="text/javascript" src="js/singlePriceModule/ViewModel.js"></script>
+    <script type="text/javascript" src="js/singlePriceModule/BindView.js"></script>
+    <script type="text/javascript" src="js/singlePriceModule/View.js"></script>
+    <script type="text/javascript" src="js/singlePriceModule/Module.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    
+  </body>
+</html>
