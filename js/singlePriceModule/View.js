@@ -24,7 +24,8 @@ class View {
         }
         
         this.#viewModel.subscribeOnLoadingListener(this.#showLoading);
-        this.#viewModel.subscribeOnPostSinglePriceSuccessListener(this.#onPostSinglePriceSuccessListener);
+        this.#viewModel.subscribeOnRequestCurrencyListener(this.#onRequestCurrencySuccessfulListener);
+        this.#viewModel.subscribeOnPostSinglePriceListener(this.#onPostSinglePriceSuccessListener);
         this.#viewModel.subscribeOnErrorListener(this.#onErrorListener);
         this.#showLoading(false);
     }
@@ -44,6 +45,10 @@ class View {
     };
 
     #onPostSinglePriceSuccessListener = (dataObject) => {
+        console.log(dataObject);
+    };
+
+    #onRequestCurrencySuccessfulListener = (dataObject) => {
         console.log(dataObject);
     };
 }

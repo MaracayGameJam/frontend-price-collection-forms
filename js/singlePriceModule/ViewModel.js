@@ -3,8 +3,9 @@
 class ViewModel {
     
     #loadingEventBus;
-    #postSinglePriceSuccessEventBus;
     #errorEventBus;
+    #postSinglePriceSuccessEventBus;
+    #requestCurrencySuccessfulEventBus;
 
     #apiManager;
 
@@ -22,6 +23,10 @@ class ViewModel {
 
     setErrorEventBus(errorEventBus) {
         this.#errorEventBus = errorEventBus;
+    }
+
+    setRequestCurrencySuccessEventBus(requestCurrencySuccessfulEventBus) {
+        this.#requestCurrencySuccessfulEventBus = requestCurrencySuccessfulEventBus;
     }
 
     subscribeOnLoadingListener = (func) => {
@@ -48,15 +53,27 @@ class ViewModel {
         }
     };
 
-    subscribeOnPostSinglePriceSuccessListener = (func) => {
+    subscribeOnPostSinglePriceListener = (func) => {
         if (this.#postSinglePriceSuccessEventBus != null) {
             this.#postSinglePriceSuccessEventBus.subscribe(func);
         }
     };
 
-    unsubscribeOnPostSinglePriceSuccessListener = (func) => {
+    unsubscribeOnPostSinglePriceListener = (func) => {
         if (this.#postSinglePriceSuccessEventBus != null) {
             this.#postSinglePriceSuccessEventBus.unsubscribe(func);
+        }
+    };
+
+    subscribeOnRequestCurrencyListener = (func) => {
+        if (this.#requestCurrencySuccessfulEventBus != null) {
+            this.#requestCurrencySuccessfulEventBus.subscribe(func);
+        }
+    };
+
+    unsubscribeOnRequestCurrencyListener = (func) => {
+        if (this.#requestCurrencySuccessfulEventBus != null) {
+            this.#requestCurrencySuccessfulEventBus.unsubscribe(func);
         }
     };
 
@@ -117,6 +134,12 @@ class ViewModel {
     #onErrorNotify = (errorObject) => {
         if (this.#errorEventBus != null) {
             this.#errorEventBus.dispatch(errorObject);
+        }
+    };
+
+    #onRequestCurrencySuccessfulNotify = (dataObject) => {
+        if (this.#requestCurrencySuccessfulEventBus != null) {
+            this.#requestCurrencySuccessfulEventBus.dispatch(dataObject);
         }
     };
 
