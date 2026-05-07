@@ -28,6 +28,8 @@ class View {
         this.#viewModel.subscribeOnPostSinglePriceListener(this.#onPostSinglePriceSuccessListener);
         this.#viewModel.subscribeOnErrorListener(this.#onErrorListener);
         this.#showLoading(false);
+
+        this.#viewModel.requestInitialData();
     }
 
     onPressSendButtonListener = () => {

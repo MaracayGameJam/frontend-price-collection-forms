@@ -78,7 +78,19 @@ class ViewModel {
     };
 
     requestInitialData = () => {
-
+        this.#loadingNotify(true);
+        this.#resquestCurrencies()
+            .then((res) => {
+                this.#onRequestCurrencyNotify(res);
+                //nextResquest
+            })
+            .catch((err) => {
+                console.error(err);
+                
+            })
+            .finally(() => {
+                this.#loadingNotify(false);
+            }); 
     }
 
     requestCategories = () => {
@@ -137,11 +149,15 @@ class ViewModel {
         }
     };
 
-    #onRequestCurrencySuccessfulNotify = (dataObject) => {
+    #onRequestCurrencyNotify = (dataObject) => {
         if (this.#requestCurrencySuccessfulEventBus != null) {
             this.#requestCurrencySuccessfulEventBus.dispatch(dataObject);
         }
     };
+
+    #resquestCurrencies = async (payload) => {
+        return this.#apiManager.getCurrencies();
+    }
 
     #postPrice = async (payload) => {
         return this.#apiManager.postPrice(payload);
