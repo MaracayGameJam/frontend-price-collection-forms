@@ -4,11 +4,10 @@ class ApiManager {
     
     #apiSettings;
     
-    METHODS = {
+    static METHODS = Object.freeze({
         "GET":"GET",
         "POST":"POST",
-        "PUT":"PUT"
-    }
+    });
 
     constructor(apiSettings ) {
 
@@ -20,7 +19,7 @@ class ApiManager {
         const SUBMIT_PATH = "/api/currencies";
         const url = `${this.#apiSettings.baseUrl}${SUBMIT_PATH}`;
         const response = await fetch(url, {
-            method: METHODS.GET,
+            method: ApiManager.METHODS.GET,
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
         });
@@ -58,7 +57,7 @@ class ApiManager {
         const SUBMIT_PATH = "/api/prices";
         const url = `${this.#apiSettings.baseUrl}${SUBMIT_PATH}`;
         const response = await fetch(url, {
-            method: METHODS.POST,
+            method: ApiManager.METHODS.POST,
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
         });

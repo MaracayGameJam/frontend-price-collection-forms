@@ -52,5 +52,6 @@ class View {
 
     #onRequestCurrencySuccessfulListener = (dataObject) => {
         console.log(dataObject);
+        //console.log(ModuleStatus.values())
     };
 }

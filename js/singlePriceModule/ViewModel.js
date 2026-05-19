@@ -78,6 +78,7 @@ class ViewModel {
     };
 
     requestInitialData = () => {
+        
         this.#loadingNotify(true);
         this.#resquestCurrencies()
             .then((res) => {
@@ -106,6 +107,7 @@ class ViewModel {
     }
 
     processSinglePrice = (dataView) => {
+
         this.#loadingNotify(true);
         let error = null;
         let response = null;
