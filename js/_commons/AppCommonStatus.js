@@ -29,6 +29,10 @@ class AppCommonStatus extends EnumClass{
     getAppStatusMessage = () => {
         return this.#app_status_message;
     }
+
+    static getStatusByKeyName = (status_name) => {
+        return AppCommonStatus.#keyNames[status_name];
+    }
     
     static buildStatus(status_name, status_message)  {
         return Object.freeze(new this(status_name,status_message))
