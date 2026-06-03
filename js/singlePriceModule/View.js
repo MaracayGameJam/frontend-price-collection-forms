@@ -34,10 +34,12 @@ class View {
 
     onPressSendButtonListener = () => {
         
-        const currencyView = this.#bindings.currency;
-        const currencyId = currencyView.options[currencyView.selectedIndex].value;
+        const currenciesView = this.#bindings.currency;
+        const currencySelected = currenciesView.options[currenciesView.selectedIndex];
         
-        this.#viewModel.processSinglePrice({"currencyId":currencyId});
+        this.#viewModel.processSinglePrice({
+            "currencyId":currencySelected.value
+        });
     };
 
     #showLoading = (show) => {
