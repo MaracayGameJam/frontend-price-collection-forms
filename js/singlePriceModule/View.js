@@ -33,7 +33,11 @@ class View {
     }
 
     onPressSendButtonListener = () => {
-        this.#viewModel.processSinglePrice({});
+        
+        const currencyView = this.#bindings.currency;
+        const currencyId = currencyView.options[currencyView.selectedIndex].value;
+        
+        this.#viewModel.processSinglePrice({"currencyId":currencyId});
     };
 
     #showLoading = (show) => {
@@ -50,8 +54,14 @@ class View {
         console.log(dataObject);
     };
 
-    #onRequestCurrencySuccessfulListener = (dataObject) => {
-        console.log(dataObject);
-        //console.log(ModuleStatus.values())
+    #onRequestCurrencySuccessfulListener = (currencies) => {
+        const currencySelect = this.#bindings.currency;
+        currencySelect.innerHTML = "";
+        currencies.forEach((currency) => {
+            const option = document.createElement("option");
+            option.value = currency.id;
+            option.textContent = currency.name;
+            currencySelect.appendChild(option);
+        });
     };
 }

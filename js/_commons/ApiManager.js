@@ -44,7 +44,7 @@ class ApiManager {
                     name:"BOLÍVAR"
                 },
                 {
-                    id:2,
+                    id:4,
                     name:"EURO"
                 }
             ]

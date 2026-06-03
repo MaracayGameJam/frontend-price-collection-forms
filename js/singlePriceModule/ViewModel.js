@@ -82,7 +82,8 @@ class ViewModel {
         this.#loadingNotify(true);
         this.#resquestCurrencies()
             .then((res) => {
-                this.#onRequestCurrencyNotify(res);
+                
+                this.#onRequestCurrencyNotify(res.data);
                 //nextResquest
             })
             .catch((err) => {
