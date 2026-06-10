@@ -9,6 +9,7 @@ class BindView {
 
     constructor(rootView) {
 
+        this.#binding.rootDocument = rootView;
         this.#binding.category = rootView.getElementById("category");
         this.#binding.product = rootView.getElementById("product");
         this.#binding.presentation = rootView.getElementById("presentation");
@@ -17,6 +18,8 @@ class BindView {
         this.#binding.store = rootView.getElementById("store");
         this.#binding.submitButton = rootView.getElementById("submit-price-form");
         this.#binding.loadingWrapper = rootView.getElementById("loading-wrapper");
+        this.#binding.productSpinner = rootView.getElementById("product-spinner");
+        this.#binding.productDropdown = rootView.getElementById("product-listbox");
     }
 
 }

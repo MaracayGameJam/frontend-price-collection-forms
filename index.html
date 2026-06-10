@@ -11,14 +11,28 @@
       <form id="price-form" novalidate>
         <div class="fields">
           
-          <div class="field">
+          <div class="field field--autocomplete">
             <label for="product">Producto</label>
-            <input 
-              id="product" 
-              name="product" 
-              type="text" 
-              autocomplete="off" 
-            />
+            <div class="autocomplete-wrapper">
+              <input
+                id="product"
+                name="product"
+                type="text"
+                autocomplete="off"
+                role="combobox"
+                aria-autocomplete="list"
+                aria-expanded="false"
+                aria-controls="product-listbox"
+              />
+              <span id="product-spinner" class="autocomplete-spinner" aria-hidden="true"></span>
+            </div>
+            <ul
+              id="product-listbox"
+              class="autocomplete-dropdown"
+              role="listbox"
+              aria-label="Resultados de búsqueda de productos"
+              hidden
+            ></ul>
           </div>
           
           <div class="field">

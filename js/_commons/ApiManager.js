@@ -20,8 +20,7 @@ class ApiManager {
         const url = `${this.#apiSettings.baseUrl}${SUBMIT_PATH}`;
         const response = await fetch(url, {
             method: ApiManager.METHODS.GET,
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
+            headers: { "Content-Type": "application/json" }
         });
 
         if (!response.ok) {
@@ -58,8 +57,7 @@ class ApiManager {
         const url = `${this.#apiSettings.baseUrl}${SUBMIT_PATH}`;
         const response = await fetch(url, {
             method: ApiManager.METHODS.GET,
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
+            headers: { "Content-Type": "application/json" }
         });
 
         if (!response.ok) {
