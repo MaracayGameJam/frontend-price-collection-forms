@@ -2,19 +2,29 @@
 
 class ViewModel {
     
-    #loadingEventBus;
-    #errorEventBus;
+    #postSinglePriceLoadingEventBus;
     #postSinglePriceSuccessEventBus;
+    
+    #searchingProductLoadingEventBus;
+    #searchProductSuccessfulEventBus;
+    
     #requestCurrencySuccessfulEventBus;
-
+    
+    #errorEventBus;
+    
     #apiManager;
 
     constructor(apiManager) {
         this.#apiManager = apiManager;
     }
 
-    setLoadingEventBus(loadingEventBus) {
-        this.#loadingEventBus = loadingEventBus;
+    /* 
+    ================================================
+    post single price methods related
+    ================================================
+    */
+    setPostSinglePriceLoadingEventBus(loadingEventBus) {
+        this.#postSinglePriceLoadingEventBus = loadingEventBus;
     }
 
     setPostSinglePriceSuccessEventBus(postSinglePriceSuccessEventBus) {
@@ -25,19 +35,15 @@ class ViewModel {
         this.#errorEventBus = errorEventBus;
     }
 
-    setRequestCurrencySuccessEventBus(requestCurrencySuccessfulEventBus) {
-        this.#requestCurrencySuccessfulEventBus = requestCurrencySuccessfulEventBus;
-    }
-
     subscribeOnLoadingListener = (func) => {
-        if (this.#loadingEventBus != null) {
-            this.#loadingEventBus.subscribe(func);
+        if (this.#postSinglePriceLoadingEventBus != null) {
+            this.#postSinglePriceLoadingEventBus.subscribe(func);
         }
     };
 
     unsubscribeOnLoadingListener = (func) => {
-        if (this.#loadingEventBus != null) {
-            this.#loadingEventBus.unsubscribe(func);
+        if (this.#postSinglePriceLoadingEventBus != null) {
+            this.#postSinglePriceLoadingEventBus.unsubscribe(func);
         }
     };
 
@@ -65,6 +71,15 @@ class ViewModel {
         }
     };
 
+    /* 
+    ================================================
+    get currencies methods related
+    ================================================
+    */
+    setRequestCurrencySuccessEventBus(requestCurrencySuccessfulEventBus) {
+        this.#requestCurrencySuccessfulEventBus = requestCurrencySuccessfulEventBus;
+    }
+
     subscribeOnRequestCurrencyListener = (func) => {
         if (this.#requestCurrencySuccessfulEventBus != null) {
             this.#requestCurrencySuccessfulEventBus.subscribe(func);
@@ -77,9 +92,60 @@ class ViewModel {
         }
     };
 
+    /* 
+    ================================================
+    search products methods related
+    ================================================
+    */
+    
+    
+    setSearchingProductLoadingEventBus(eventBus) {
+        this.#searchingProductLoadingEventBus = eventBus;
+    }
+    
+    subscribeOnSearchProductLoadingListener = (func) => {
+        if (this.#searchProductSuccessfulEventBus != null) {
+            this.#searchingProductLoadingEventBus.subscribe(func);
+        }
+    };
+
+    unsubscribeOnSearchProductLoadingListener = (func) => {
+        if (this.#searchProductSuccessfulEventBus != null) {
+            this.#searchingProductLoadingEventBus.unsubscribe(func);
+        }
+    };
+
+    setSearchProductSuccessfulEventBus(eventBus) {
+        this.#searchProductSuccessfulEventBus = eventBus;
+    }
+
+    subscribeOnSearchProductListener = (func) => {
+        if (this.#searchProductSuccessfulEventBus != null) {
+            this.#searchProductSuccessfulEventBus.subscribe(func);
+        }
+    };
+
+    unsubscribeOnSearchProductListener = (func) => {
+        if (this.#searchProductSuccessfulEventBus != null) {
+            this.#searchProductSuccessfulEventBus.unsubscribe(func);
+        }
+    };
+
+    searchProduct = (text) => {
+        
+        if(text != null) {
+            text = String(text).trim();
+            if(text.length > 0) {
+                this.#searchingProductLoadingNotify(true);
+                console.log(text);
+                this.#searchingProductLoadingNotify(false);
+            }
+        }
+    }
+
     requestInitialData = () => {
         
-        this.#loadingNotify(true);
+        this.#postSinglePriceLoadingNotify(true);
         this.#resquestCurrencies()
             .then((res) => {
                 
@@ -91,10 +157,11 @@ class ViewModel {
                 
             })
             .finally(() => {
-                this.#loadingNotify(false);
+                this.#postSinglePriceLoadingNotify(false);
             }); 
     }
 
+    
     requestCategories = () => {
 
     }
@@ -109,7 +176,7 @@ class ViewModel {
 
     processSinglePrice = (dataView) => {
 
-        this.#loadingNotify(true);
+        this.#postSinglePriceLoadingNotify(true);
         let error = null;
         let response = null;
         this.#postPrice(dataView)
@@ -121,7 +188,7 @@ class ViewModel {
                 error = err;
             })
             .finally(() => {
-                this.#loadingNotify(false);
+                this.#postSinglePriceLoadingNotify(false);
                 this.#postSinglePriceManagerResponse(response, error);
             });
     };
@@ -133,10 +200,16 @@ class ViewModel {
             this.#onPostSinglePriceSuccessNotify(response);
         }
     };
-
-    #loadingNotify = (loading) => {
-        if (this.#loadingEventBus != null) {
-            this.#loadingEventBus.dispatch(loading);
+    
+    #searchingProductLoadingNotify = (loading) => {
+        if (this.#postSinglePriceLoadingEventBus != null) {
+            this.#searchingProductLoadingEventBus.dispatch(loading);
+        }
+    }
+    
+    #postSinglePriceLoadingNotify = (loading) => {
+        if (this.#postSinglePriceLoadingEventBus != null) {
+            this.#postSinglePriceLoadingEventBus.dispatch(loading);
         }
     };
 
