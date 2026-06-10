@@ -26,6 +26,7 @@ class View {
         }
         
         this.#viewModel.subscribeOnSearchProductLoadingListener(this.#showLoadingSearchingProduct);
+        this.#viewModel.subscribeOnSearchProductListener(this.#onSearchProductsSuccessful);
         this.#viewModel.subscribeOnLoadingListener(this.#showLoading);
         this.#viewModel.subscribeOnRequestCurrencyListener(this.#onRequestCurrencySuccessfulListener);
         this.#viewModel.subscribeOnPostSinglePriceListener(this.#onPostSinglePriceSuccessListener);
@@ -67,6 +68,10 @@ class View {
     #onPostSinglePriceSuccessListener = (dataObject) => {
         console.log(dataObject);
     };
+
+    #onSearchProductsSuccessful = (products) => {
+        console.log(products)
+    }
 
     #onRequestCurrencySuccessfulListener = (currencies) => {
         const currencySelect = this.#bindings.currency;

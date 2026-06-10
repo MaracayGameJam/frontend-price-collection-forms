@@ -104,13 +104,13 @@ class ViewModel {
     }
     
     subscribeOnSearchProductLoadingListener = (func) => {
-        if (this.#searchProductSuccessfulEventBus != null) {
+        if (this.#searchingProductLoadingEventBus != null) {
             this.#searchingProductLoadingEventBus.subscribe(func);
         }
     };
 
     unsubscribeOnSearchProductLoadingListener = (func) => {
-        if (this.#searchProductSuccessfulEventBus != null) {
+        if (this.#searchingProductLoadingEventBus != null) {
             this.#searchingProductLoadingEventBus.unsubscribe(func);
         }
     };
@@ -137,8 +137,20 @@ class ViewModel {
             text = String(text).trim();
             if(text.length > 0) {
                 this.#searchingProductLoadingNotify(true);
-                console.log(text);
-                this.#searchingProductLoadingNotify(false);
+                this.#apiManager.searchProductsByTextMatch({"search":text})
+                    .then((res) => {
+                
+                        this.#onSearchProductSuccessfulNotify(res.data);
+                        //nextResquest
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                        
+                    })
+                    .finally(() => {
+                        this.#searchingProductLoadingNotify(false);
+                    }); 
+                
             }
         }
     }
@@ -207,6 +219,12 @@ class ViewModel {
         }
     }
     
+    #onSearchProductSuccessfulNotify = (dataObject) => {
+        if (this.#searchProductSuccessfulEventBus != null) {
+            this.#searchProductSuccessfulEventBus.dispatch(dataObject);
+        }
+    };
+
     #postSinglePriceLoadingNotify = (loading) => {
         if (this.#postSinglePriceLoadingEventBus != null) {
             this.#postSinglePriceLoadingEventBus.dispatch(loading);
