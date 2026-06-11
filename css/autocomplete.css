@@ -5,28 +5,31 @@
 }
 
 .autocomplete-wrapper {
-  display: flex;
-  align-items: center;
+  position: relative;
 }
 
 .autocomplete-wrapper input {
-  flex: 1;
+  width: 100%;
+  padding-right: 2.25rem;
 }
 
 .autocomplete-spinner {
   display: none;
+  position: absolute;
+  right: 0.625rem;
+  top: 50%;
+  margin-top: -8px;
   width: 16px;
   height: 16px;
   border: 2px solid rgba(189, 217, 255, 0.45);
   border-top-color: #5a9fd4;
   border-radius: 50%;
   animation: loading-spinner-rotate 0.75s linear infinite;
-  margin-left: 0.5rem;
-  flex-shrink: 0;
+  pointer-events: none;
 }
 
 .autocomplete-spinner.is-active {
-  display: inline-block;
+  display: block;
 }
 
 .autocomplete-dropdown {

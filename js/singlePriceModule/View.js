@@ -58,6 +58,12 @@ class View {
 
     #onTypeProductName = (event) => {
         clearTimeout(this.#searchTimeout);
+        const value = event.target.value.trim();
+        if (value === "") {
+            this.#hideDropdown();
+            this.#currentProducts = [];
+            return;
+        }
         this.#searchTimeout = setTimeout(() => {
             this.#viewModel.searchProduct(event.target.value);
         }, 300);
@@ -205,6 +211,10 @@ class View {
                 li.setAttribute("data-product-id", product.id);
                 li.classList.add("autocomplete-dropdown__item");
                 li.textContent = product.name;
+                li.addEventListener("mousedown", (event) => {
+                    event.preventDefault();
+                    this.#onProductSelected(product);
+                });
                 dropdown.appendChild(li);
             });
             this.#showDropdown();
